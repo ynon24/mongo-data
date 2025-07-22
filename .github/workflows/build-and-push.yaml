@@ -1,0 +1,38 @@
+name: Build and Push MongoDB Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write  # Needed for pushing to GHCR
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ynon24
+          password: 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
+
+      - name: Extract short commit SHA
+        id: vars
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/mongo-dev:${{ env.SHORT_SHA }} .
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/mongo-dev:${{ env.SHORT_SHA }}
+
