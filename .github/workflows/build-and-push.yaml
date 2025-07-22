@@ -21,8 +21,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ynon24
-          password: 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
+          username: ${{ github.actor }}
+          password: ${{ secrets.MONGODB_USERNAME}}
 
       - name: Extract short commit SHA
         id: vars
