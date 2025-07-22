@@ -1,3 +1,5 @@
+db = db.getSiblingDB('test'); // make sure we're in the test DB
+db.insurances.insertMany([
 
   {
     "property_address": "123 Main St, Springfield",
@@ -31,4 +33,4 @@
     "insured_person": "Bob Lee",
     "policy_expiration": "2025-07-01"
   }
-
+]);
