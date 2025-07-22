@@ -44,5 +44,16 @@ The GitHub Actions pipeline is triggered on every push to the `main` branch.
 
 ---
 
-🧪 Quick Test Commands
-<pre> ```bash # Run the MongoDB image locally docker run -d --name mongo-test -p 27017:27017 ghcr.io/ynon24/mongo-dev:<tag> # Connect using mongosh mongosh mongodb://localhost:27017 # Inside the Mongo shell: show collections db.insurances.find().pretty() ``` </pre>
+### 🧪 Quick Test Commands
+
+```bash
+# Run the MongoDB image locally
+docker run -d --name mongo-test -p 27017:27017 ghcr.io/ynon24/mongo-dev:<tag>
+
+# Connect using mongosh
+mongosh mongodb://localhost:27017
+
+# Inside the Mongo shell:
+show collections
+db.insurances.find().pretty()
+
