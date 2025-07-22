@@ -44,7 +44,15 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/mongo-dev:${{ env.SHORT_SHA }}
 
 
-      # - name: Push Docker image
-      #   run: |
-      #     docker push ghcr.io/${{ github.repository_owner }}/mongo-dev:${{ env.SHORT_SHA }}
+      - name: Clone app-config repo
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git clone https://github.com/ynon24/app-config.git
+          cd app-config
+          echo "${{ env.SHORT_SHA }}" > mongodb-version.txt
+          git add mongodb-version.txt
+          git commit -m "Update MongoDB image tag to ${{ env.SHORT_SHA }}"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ynon24/app-config.git HEAD:main
+
 
