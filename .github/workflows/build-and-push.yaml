@@ -53,6 +53,6 @@ jobs:
           echo "${{ env.SHORT_SHA }}" > mongodb-version.txt
           git add mongodb-version.txt
           git commit -m "Update MongoDB image tag to ${{ env.SHORT_SHA }}"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ynon24/app-config.git HEAD:main
+          git push https://x-access-token:${{ secrets.APP_CONFIG_PAT }}@github.com/ynon24/app-config.git HEAD:main
 
 
